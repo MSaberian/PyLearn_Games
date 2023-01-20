@@ -1,4 +1,4 @@
-# PyLearn_SnakeGame manual and AI
+# Snake Game manual and AI
 Hi, the snake game developed by python.
 
 This project inclode two type of game, manual and artificial intellgent. The manual version is in main.py and AI in main_ai.py.
