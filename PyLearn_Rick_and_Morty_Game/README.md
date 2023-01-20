@@ -1,4 +1,4 @@
-# PyLear_Game
+# Rick and Morty Game
 Rick and Morty is the game that you wanted it!
 
 In this version of game, you have to support citadel from enemy spacecraft with rick's spaceship!
