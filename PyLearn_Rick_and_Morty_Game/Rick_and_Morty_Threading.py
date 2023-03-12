@@ -1,6 +1,8 @@
 import random
 import arcade
-from datetime import datetime
+# from datetime import datetime
+import threading
+import time
 from spaceship import Spaceship
 from enemy import Enemy
 from bullet import Bullet
@@ -92,6 +94,7 @@ class Game(arcade.Window):
                 for i in range(self.heart):
                     self.hearts.append(Heart(i))
                 self.state = 'game'
+                t.start()
                 self.play_theme_sound.delete()
                 self.play_game_sound = arcade.play_sound(self.game_sound,1,0,True)
         elif self.state == 'game':
@@ -153,20 +156,26 @@ class Game(arcade.Window):
                 if fire.duration == 0:
                     self.fires.remove(fire)
 
-            self.time_now = datetime.now()
-            if self.first_enemy:
-                self.first_enemy = False
-                self.last_time = self.time_now
-            if (self.time_now - self.last_time).total_seconds() > (5 - self.difficaulty):
-                self.new_enemy = Enemy(random.randint(100,self.width-100),self.height + 120, self.level)
-                self.enemies.append(self.new_enemy)
-                self.last_time = self.time_now
+            # self.time_now = datetime.now()
+            # if self.first_enemy:
+            #     self.first_enemy = False
+            #     self.last_time = self.time_now
+            # if (self.time_now - self.last_time).total_seconds() > (5 - self.difficaulty):
+            #     self.new_enemy = Enemy(random.randint(100,self.width-100),self.height + 120, self.level)
+            #     self.enemies.append(self.new_enemy)
+            #     self.last_time = self.time_now
 
             self.counter_level += 1
             if self.counter_level == 3000:
                 self.counter_level = 0
                 if self.level < 10:
                     self.level += 1
+
+    def create_enemy(self):
+        while True:
+            self.new_enemy = Enemy(random.randint(100,self.width-100),self.height + 120, self.level)
+            self.enemies.append(self.new_enemy)
+            time.sleep(5)
  
     def game_over(self):
         open('database/score.txt', 'w').close()
@@ -188,4 +197,5 @@ class Game(arcade.Window):
         arcade.play_sound(self.game_over_sound,1,0,True)
 
 window = Game()
+t = threading.Thread(target= window.create_enemy)
 arcade.run()
