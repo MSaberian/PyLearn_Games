@@ -30,4 +30,6 @@ The best score of spatial level show in the game. Don't hack game by change data
 
 ![_game_over](https://user-images.githubusercontent.com/43343453/212345318-e49cb3d9-eb83-42aa-aeca-bfe0dcc34bd4.png)
 
+Main file to process is Rick_and_Morty.py and in Rick_and_Morty_threading.py is developed by multi-threading for create enemies.
+
 And at the end, many sounds are played in the game.
